@@ -1,0 +1,44 @@
+#Copyright (C) 2006  Ronan Sandford
+#
+#This file is part of Quantum Library
+#
+#    Quantum Library is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    Quantum Library is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+To install the library, you have to do it manually
+
+first: 
+
+make 
+
+it will create 3 files in lib directory, they are the soname files and links . libquantumlibrary.so.x.y should be copied in /usr/local/lib
+x = version number
+y = minor number
+
+then execute (as root):
+
+ln -sf libquantumlibrary.so.x.y /usr/local/lib/libquantumlibrary.so.x
+ln -sf libquantumlibrary.so.x /usr/local/lib/libquantumlibrary.so
+
+/usr/bin/local should be in the LD_LIBRARY_PATH or be by another mean in the search path of ld
+(I need documentation nd explaination about it)
+
+and thats it !
+
+I need comment about it because I want the process of installation to be automatic
+
+The makefile shoud be modified
+
+Sorry for the incovenience !
+
