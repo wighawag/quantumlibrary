@@ -47,7 +47,7 @@ CPPFLAGS += -g -Wall -ansi -pedantic -fPIC
 
 # regles ######################################################################
 
-all: $(APP)
+all: setup $(APP)
 
 #$(APP): CC = $(CXX)
 $(APP): $(LDIR)/lib$(library).so.$(version).$(minor) 
@@ -55,7 +55,7 @@ $(APP): $(LDIR)/lib$(library).so.$(version).$(minor) ;  $(CPP) $(CXXFLAGS) $(CPP
 
 
 $(LDIR)/lib$(library).so.$(version).$(minor): $(OBJ)
-	$(CPP) -shared -W1,soname,lib$(library).so.$(version) -o $(LDIR)/lib$(library).so.$(version).$(minor) $^ $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) 
+	$(CPP) -shared -Wl,-soname,lib$(library).so.$(version) -o $(LDIR)/lib$(library).so.$(version).$(minor) $^ $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) 
 	#/sbin/ldconfig -n $(LDIR)
 	ln -sf lib$(library).so.$(version).$(minor) $(LDIR)/lib$(library).so.$(version)
 	ln -sf lib$(library).so.$(version) $(LDIR)/lib$(library).so
@@ -63,6 +63,11 @@ $(LDIR)/lib$(library).so.$(version).$(minor): $(OBJ)
 
 $(ODIR)/%.o: $(SDIR)/%.cpp $(DEP)
 	$(CPP) -c -o $@ $< $(CXXFLAGS) $(CPPFLAGS)
+
+setup:
+	mkdir -p obj
+	mkdir -p bin
+	mkdir -p lib
 
 clean:
 	rm -f $(OBJ)
